@@ -27,7 +27,7 @@ public class GlvrdWebTest {
 
     @ParameterizedTest(name = "Для текста {0} должен быть получен балл {1}")
     @Tag("WEB")
-    void textPoint(String text, String expectedPoint) {
+    void textPointTest(String text, String expectedPoint) {
         $("#glaveditor-id .ql-editor").setValue(text);
         $(".stats-score").shouldHave(text(expectedPoint));
     }
@@ -38,7 +38,7 @@ public class GlvrdWebTest {
     })
     @ParameterizedTest(name = "Для текста {0} не должно быть найдено ни одного стоп-слова")
     @Tag("BLOKER")
-    void textWithoutStopword(String testText){
+    void textWithoutStopwordTest(String testText){
         $("#glaveditor-id .ql-editor").setValue(testText);
         $(".stats-result-div").shouldHave(text("0 стоп-слов."));
     }
@@ -47,7 +47,7 @@ public class GlvrdWebTest {
 
 
 
-    static Stream<Arguments> successTextCheck() {
+    static Stream<Arguments> successTextCheckTest() {
         return Stream.of(
                 Arguments.of(
                         CheckTab.PURITY,
@@ -73,7 +73,7 @@ public class GlvrdWebTest {
     @MethodSource
     @ParameterizedTest
     @Tag("WEB")
-    void successTextCheck(CheckTab checkTab, String text, List<String> expectedParam) {
+    void successTextCheckTest(CheckTab checkTab, String text, List<String> expectedParam) {
         $$(".tab").find(text(checkTab.description)).click();
         $("#glaveditor-id .ql-editor").setValue(text);
         $$(".stats div").shouldHave(texts(expectedParam));
